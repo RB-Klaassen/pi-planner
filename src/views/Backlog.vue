@@ -15,8 +15,7 @@
 
     <draggable v-model="projectlist"
                item-key="id"
-               ghost-class="ghost"
-               @end="onDragEnd">
+               ghost-class="ghost">
       <template #item="{ element }">
         <backlog-item :item="element"></backlog-item>
       </template>
@@ -26,25 +25,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import draggable from 'vuedraggable';
 import BacklogItem from '@/components/backlog/BacklogItem.vue';
-import dummy from '@/assets/dummyData.js';
 
-const projectlist = ref([]);
+const store = useStore();
 
-const show = ref(false);
+// need to define a getter and setter for the projectList, so updates in the order are written to the vuex store
+const projectlist = computed({
+  get () { return store.getters['backlog/fullBacklog'] },
+  set (value) { store.dispatch('backlog/saveBacklog', value) }
+})
 
-// use dummy data for now
-projectlist.value = dummy;
-
-// Update the order field based on array index when draggin stops
-const onDragEnd = async () => {
-  for (let i = 0; i < projectlist.value.length; i++) {
-    projectlist.value[i].order = i;
-    console.log(projectlist.value[i]);
-  }
-}
 </script>
 
 <style scoped>

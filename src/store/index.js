@@ -1,18 +1,11 @@
 import { createStore } from "vuex";
+import backlogModule from "./backlog";
+import authModule from "./auth";
 
 const store = createStore({
-  state() {
-    return {
-      userProfile: {
-        userName: "Remko Klaassen",
-        role: "admin",
-      },
-    };
-  },
-  getters: {
-    getUserProfile(state) {
-      return state.userProfile;
-    },
+  modules: {
+    backlog: backlogModule,
+    auth: authModule,
   },
 });
 
