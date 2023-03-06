@@ -15,7 +15,13 @@ const routes = [
   {
     path: "/Backlog",
     name: "Backlog",
-    component: () => import("@/views/Backlog.vue"),
+    component: () => import("@/views/Backlog/Backlog.vue"),
+  },
+  {
+    path: "/EditProject/:id",
+    name: "EditProject",
+    props: true,
+    component: () => import("@/views/Backlog/EditProject.vue"),
   },
   {
     path: "/PiOverview",

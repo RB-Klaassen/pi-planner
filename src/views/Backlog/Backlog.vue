@@ -1,6 +1,18 @@
 <template>
   <v-container fluid>
-
+    <v-row>
+      <v-btn variant="flat"
+             color="primary"
+             rounded="pill"
+             :to="{
+               name: 'EditProject',
+               params:
+               {
+                 id:
+                   'NEW'
+               }
+             }">Edit</v-btn>
+    </v-row>
     <v-card variant="outlined"
             density="compact">
       <v-card-title style="background-color: lightblue">
@@ -25,6 +37,10 @@
 </template>
 
 <script setup>
+// TODO: filtering on columns
+// TODO: export function for backlog
+// TODO: Add project button
+
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import draggable from 'vuedraggable';

@@ -9,6 +9,7 @@ export default {
           description: "take over the world",
           lead: "Brain",
           type: "KLO",
+          PIPlans: ["2022-Q3", "2022-Q4"],
           order: 0,
         },
         {
@@ -16,7 +17,8 @@ export default {
           name: "Plan B",
           description: "take over the world again",
           lead: "Brain",
-          type: "KLO",
+          type: "Regulatory",
+          PIPlans: ["2022-Q2", "2022-Q4"],
           order: 1,
         },
         {
@@ -25,6 +27,7 @@ export default {
           description: "Narf",
           lead: "Pinky",
           type: "KLO",
+          PIPlans: ["2023-Q1"],
           order: 2,
         },
       ],
@@ -35,11 +38,18 @@ export default {
     fullBacklog(state) {
       return state.backlog;
     },
+
+    getProject: (state) => (id) => {
+      return state.backlog.find((c) => c.id === id);
+    },
   },
 
   mutations: {
     saveBacklog(state, payload) {
       state.backlog = payload;
+    },
+    addProject(state, payload) {
+      state.backlog.push(payload);
     },
   },
 
@@ -50,6 +60,9 @@ export default {
         payload[i].order = i;
       }
       context.commit("saveBacklog", payload);
+    },
+    addProject(context, payload) {
+      context.commit("addProject", payload);
     },
   },
 };
