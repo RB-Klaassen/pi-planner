@@ -9,11 +9,10 @@
                  @click="show = !show"
                  size="x-small"
                  variant="flat"></v-btn>
-          {{ item.id }}
+          {{ item.projectId }}
         </v-col>
         <v-col cols="1">
           <v-chip :color="item.type">{{ item.type }}</v-chip>
-
         </v-col>
         <v-col cols="6">
           {{ item.name }}
@@ -48,9 +47,7 @@
 
           <v-card-actions>
             <v-row justify="space-around">
-              <v-btn variant="flat"
-                     color="#FF8A80"
-                     rounded="pill">delete</v-btn>
+
               <v-btn variant="flat"
                      color="primary"
                      rounded="pill"
@@ -62,6 +59,10 @@
                            item.id
                        }
                      }">Edit</v-btn>
+              <v-btn variant="flat"
+                     color="#FF8A80"
+                     rounded="pill"
+                     @click="deleteProject">Delete</v-btn>
             </v-row>
           </v-card-actions>
         </v-card-text>
@@ -77,12 +78,12 @@
 import { ref } from 'vue';
 
 const props = defineProps(['item']);
+const emit = defineEmits(['deleteProject']);
 const show = ref(false);
+
+function deleteProject () {
+  emit('deleteProject', props.item.id);
+}
 
 </script>
 
-<style scoped>
-.KLO {
-  color: --primary
-}
-</style>

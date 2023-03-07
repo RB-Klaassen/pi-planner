@@ -4,30 +4,36 @@ export default {
     return {
       backlog: [
         {
-          id: "GRIDICB-001",
+          id: "001",
+          projectId: "GRIDICB-001",
           name: "Plan a",
           description: "take over the world",
           lead: "Brain",
           type: "KLO",
           PIPlans: ["2022-Q3", "2022-Q4"],
+          status: "New",
           order: 0,
         },
         {
-          id: "GRIDICB-002",
+          id: "002",
+          projectId: "GRIDICB-002",
           name: "Plan B",
           description: "take over the world again",
           lead: "Brain",
-          type: "Regulatory",
+          type: "LTO",
           PIPlans: ["2022-Q2", "2022-Q4"],
+          status: "In progress",
           order: 1,
         },
         {
-          id: "GRIDICB-003",
+          id: "003",
+          projectId: "GRIDICB-003",
           name: "Beep",
           description: "Narf",
           lead: "Pinky",
-          type: "KLO",
+          type: "MBF",
           PIPlans: ["2023-Q1"],
+          status: "Cancelled",
           order: 2,
         },
       ],
@@ -51,6 +57,16 @@ export default {
     addProject(state, payload) {
       state.backlog.push(payload);
     },
+    deleteProject(state, id) {
+      state.backlog.splice(
+        state.backlog.findIndex((e) => e.id === id),
+        1
+      );
+    },
+    updateProject(state, payload) {
+      state.backlog[state.backlog.findIndex((e) => e.id === payload.id)] =
+        payload;
+    },
   },
 
   actions: {
@@ -63,6 +79,12 @@ export default {
     },
     addProject(context, payload) {
       context.commit("addProject", payload);
+    },
+    updateProject(context, payload) {
+      context.commit("updateProject", payload);
+    },
+    deleteProject(context, id) {
+      context.commit("deleteProject", id);
     },
   },
 };

@@ -1,18 +1,21 @@
 <template>
   <v-container fluid>
-    <v-row>
-      <v-btn variant="flat"
-             color="primary"
-             rounded="pill"
-             :to="{
-               name: 'EditProject',
-               params:
-               {
-                 id:
-                   'NEW'
-               }
-             }">Edit</v-btn>
-    </v-row>
+    <v-card>
+      <v-card-actions>
+        <v-btn variant="flat"
+               color="primary"
+               rounded="pill"
+               :to="{
+                 name: 'EditProject',
+                 params:
+                 {
+                   id:
+                     'NEW'
+                 }
+               }">New project</v-btn>
+      </v-card-actions>
+    </v-card>
+
     <v-card variant="outlined"
             density="compact">
       <v-card-title style="background-color: lightblue">
@@ -29,7 +32,8 @@
                item-key="id"
                ghost-class="ghost">
       <template #item="{ element }">
-        <backlog-item :item="element"></backlog-item>
+        <backlog-item :item="element"
+                      @delete-project="deleteProject"></backlog-item>
       </template>
     </draggable>
 
@@ -39,7 +43,6 @@
 <script setup>
 // TODO: filtering on columns
 // TODO: export function for backlog
-// TODO: Add project button
 
 import { computed } from 'vue';
 import { useStore } from 'vuex';
@@ -48,11 +51,17 @@ import BacklogItem from '@/components/backlog/BacklogItem.vue';
 
 const store = useStore();
 
-// need to define a getter and setter for the projectList, so updates in the order are written to the vuex store
+// need to define a getter and setter for the projectList, so updates in the order are written back to the vuex store
 const projectlist = computed({
   get () { return store.getters['backlog/fullBacklog'] },
   set (value) { store.dispatch('backlog/saveBacklog', value) }
 })
+
+// TODO: delete option should only be available for admins or project leads
+// delete the project
+function deleteProject (id) {
+  store.dispatch('backlog/deleteProject', id)
+}
 
 </script>
 
