@@ -4,7 +4,7 @@
     <v-card-title>
 
       <v-row>
-        <v-col cols="3">
+        <v-col cols="2">
           <v-btn :icon="show ? 'mdi-chevron-down' : 'mdi-chevron-right'"
                  @click="show = !show"
                  size="x-small"
@@ -14,12 +14,9 @@
         <v-col cols="1">
           <v-chip :color="item.type">{{ item.type }}</v-chip>
         </v-col>
-        <v-col cols="6">
-          {{ item.name }}
-        </v-col>
-        <v-col cols="2">
-          {{ item.lead }}
-        </v-col>
+        <v-col cols="6">{{ item.name }}</v-col>
+        <v-col cols="2">{{ item.lead }}</v-col>
+        <v-col cols="1">{{ item.status }}</v-col>
       </v-row>
 
     </v-card-title>
@@ -44,10 +41,17 @@
                       color="secondary">{{ pi }}</v-chip>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col cols="3"
+                   offset="1">
+              <h4>Epic / Episode link</h4>
+            </v-col>
+            <v-col><a :href="item.ticketLink"
+                 target="_blank">{{ item.ticketLink }}</a></v-col>
+          </v-row>
 
           <v-card-actions>
             <v-row justify="space-around">
-
               <v-btn variant="flat"
                      color="primary"
                      rounded="pill"
@@ -72,9 +76,6 @@
 </template>
 
 <script setup>
-// TODO: details in the expanded card
-// TODO: emitting events for button clicks
-
 import { ref } from 'vue';
 
 const props = defineProps(['item']);
@@ -86,4 +87,3 @@ function deleteProject () {
 }
 
 </script>
-

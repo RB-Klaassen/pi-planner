@@ -20,10 +20,11 @@
             density="compact">
       <v-card-title style="background-color: lightblue">
         <v-row>
-          <v-col cols="3">        ID</v-col>
+          <v-col cols="2">        ID</v-col>
           <v-col cols="1">Type</v-col>
           <v-col cols="6">Project</v-col>
           <v-col cols="2">Lead</v-col>
+          <v-col cols="1">Status</v-col>
         </v-row>
       </v-card-title>
     </v-card>

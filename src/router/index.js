@@ -26,7 +26,13 @@ const routes = [
   {
     path: "/PiOverview",
     name: "PiOverview",
-    component: () => import("@/views/PiOverview.vue"),
+    component: () => import("@/views/PIPlan/PiOverview.vue"),
+  },
+  {
+    path: "/EditPi/:id",
+    name: "EditPi",
+    props: true,
+    component: () => import("@/views/PIPlan/EditPi.vue"),
   },
 ];
 
